@@ -2,6 +2,13 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
+    <form method="post" >
+      <input type="text" name="txt1">
+         <input type="text" name="txt2">
+      <input type="file" class="file" ref="files">
+      <input type="submit" value="提交">
+      <div @click="xixi">xixi</div>
+ </form>
     <ul>
       <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
       <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
@@ -27,6 +34,14 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  methods:{
+      xixi(){
+          console.log(111)
+        var a=document.getElementsByClassName('file');
+          console.log(a)
+        console.log(this.$refs.files)
+      }
   }
 }
 </script>

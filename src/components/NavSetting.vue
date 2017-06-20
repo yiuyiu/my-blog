@@ -1,0 +1,45 @@
+<template>
+  <div class="nav-setting">
+    <div class="ui buttons">
+      <div class="ui floating dropdown button">
+        <i class="icon bars"></i>
+        <div class="menu">
+          <template v-if="hasUser">
+            <!--<a class="item" href="/posts?author=<%= user._id %>">个人主页</a>-->
+            <a class="item" href="/posts">个人主页</a>
+            <div class="divider"></div>
+            <a class="item" href="/posts/create">发表文章</a>
+            <a class="item" href="/signout">登出</a>
+          </template>
+          <template v-else>
+            <a class="item" href="/signin">登录</a>
+            <a class="item" href="/signup">注册</a>
+          </template>
+      </div>
+      </div>
+    </div>
+  </div>
+</template>
+<style scoped>
+  .nav-setting {
+    position: fixed;
+    right: 30px;
+    top: 35px;
+    z-index: 999;
+  }
+
+  .nav-setting .ui.dropdown.button {
+    padding: 10px 10px 0 10px;
+    background-color: #fff !important;
+  }
+
+  .nav-setting .icon.bars {
+    color: #000;
+    font-size: 18px;
+  }
+</style>
+<script>
+  export default{
+    props:['hasUser']
+  }
+</script>
