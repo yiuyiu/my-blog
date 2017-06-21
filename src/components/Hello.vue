@@ -2,9 +2,9 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
-    <form method="post" enctype="multipart/form-data">
-      <input type="text" name="txt1">
-         <input type="text" name="txt2">
+    <form>
+      <input type="text" name="txt1" v-model="text1">
+         <input type="text" name="txt2" v-model="text2">
       <input type="file" class="file" ref="files">
       <input type="submit" value="提交">
       <div @click="xixi">xixi</div>
@@ -28,10 +28,13 @@
 </template>
 
 <script>
+  import ax from 'axios'
 export default {
   name: 'hello',
   data () {
     return {
+        text1:'',
+      text2:'',
       msg: 'Welcome to Your Vue.js App'
     }
   },
@@ -40,16 +43,18 @@ export default {
           console.log(1112)
          var filesElement=this.$refs.files
         var formData = new FormData();
-          var form=document.querySelector('form')
-        var formData2=new FormData(form);
 // HTML 文件类型input，由用户选择
-        var b=filesElement.files[0];
-        console.log(b)
         formData.append("userfile", filesElement.files[0]);
-
-        var request = new XMLHttpRequest();
-        request.open("POST", "http://localhost:3000/xixi");
-        request.send(formData2);
+        formData.append('text1',this.text1);
+        formData.append('text2',this.text2);
+        let headers={
+          'Content-Type': 'multipart/form-data'
+        };
+        ax.post('http://localhost:3000/xixi',formData,{headers})
+//        var request = new XMLHttpRequest();
+//        request.open("POST", "http://localhost:3000/xixi");
+//        request.setRequestHeader('Content-Type','multipart/form-data');
+//        request.send(formData);
       }
 
   }

@@ -3,10 +3,10 @@
     <common-head
     :blog="blog"></common-head>
     <!--form-data相关需要看看-->
-    <form class="ui grid" method="post">
+    <div class="ui grid">
       <div class="four wide column"></div>
       <div class="eight wide column">
-        <form class="ui form segment" enctype="multipart/form-data">
+        <div class="ui form segment">
           <div class="field required">
             <label>用户名</label>
             <input type="text" placeholder="用户名" name="username" v-model="field.name">
@@ -17,7 +17,7 @@
           </div>
           <div class="field required">
             <label>重复密码</label>
-            <input type="password" name="repassword" placeholder="重复密码" v-model="field.password">
+            <input type="password" name="repassword" placeholder="重复密码" v-model="field.repassword">
           </div>
           <div class="field required">
             <label>性别</label>
@@ -29,26 +29,30 @@
           </div>
           <div class="field required">
             <label>头像</label>
-            <input type="file" name="avatar">
+            <input type="file" name="avatar" ref="fileType">
           </div>
           <div class="field required">
             <label>个人简介</label>
-            <textarea name="bio" rows="5" v-model="field.intro"></textarea>
+            <textarea name="bio" rows="5" v-model="field.signature"></textarea>
           </div>
-          <input type="submit" class="ui button fluid" value="注册">
-          <!--<button class="ui button fluid" @click="onSubmit">注册</button>-->
-        </form>
+          <button class="ui button fluid" @click="onSubmit">注册</button>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 <script>
   import CommonHead from '../components/Header.vue'
+  import ax from 'axios'
   export default{
       data(){
         return {
             field:{
-              password:''
+              name:'',
+              password:'',
+              respassword:'',
+              sex:'',
+              signature:''
             },
             blog:{
                 title:'xixi',
@@ -61,7 +65,18 @@
      },
     methods:{
       onSubmit(){
-              console.log(111)
+        let filesElement=this.$refs.fileType;
+        let formData = new FormData();
+// HTML 文件类型input，由用户选择
+        formData.append("avatar", filesElement.files[0]);
+        formData.append('username',this.field.name);
+        formData.append('password',this.field.password);
+        formData.append('sex',this.field.sex);
+        formData.append('signature',this.field.signature);
+        const headers={
+          'Content-Type': 'multipart/form-data'
+        };
+        ax.post('http://localhost:3000/signUp',formData,{headers})
       }
     }
   }
