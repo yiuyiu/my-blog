@@ -2,7 +2,7 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
-    <form method="post" >
+    <form method="post" enctype="multipart/form-data">
       <input type="text" name="txt1">
          <input type="text" name="txt2">
       <input type="file" class="file" ref="files">
@@ -37,11 +37,21 @@ export default {
   },
   methods:{
       xixi(){
-          console.log(111)
-        var a=document.getElementsByClassName('file');
-          console.log(a)
-        console.log(this.$refs.files)
+          console.log(1112)
+         var filesElement=this.$refs.files
+        var formData = new FormData();
+          var form=document.querySelector('form')
+        var formData2=new FormData(form);
+// HTML 文件类型input，由用户选择
+        var b=filesElement.files[0];
+        console.log(b)
+        formData.append("userfile", filesElement.files[0]);
+
+        var request = new XMLHttpRequest();
+        request.open("POST", "http://localhost:3000/xixi");
+        request.send(formData2);
       }
+
   }
 }
 </script>
