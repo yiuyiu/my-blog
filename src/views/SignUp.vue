@@ -9,7 +9,7 @@
         <div class="ui form segment">
           <div class="field required">
             <label>用户名</label>
-            <input type="text" placeholder="用户名" name="username" v-model="field.name">
+            <input type="text" placeholder="用户名" name="username" v-model="field.name" @blur="onblur">
           </div>
           <div class="field required">
             <label>密码</label>
@@ -77,6 +77,23 @@
           'Content-Type': 'multipart/form-data'
         };
         ax.post('http://localhost:3000/signUp',formData,{headers})
+      },
+      onblur(){
+          if(!this.field.name){
+              return false;
+          }
+//          查看有无重复的
+        ax.get('http://localhost:3000/isRegister', {
+          params: {
+            username: this.field.name
+          }
+        })
+          .then(function (res) {
+            console.log(res);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       }
     }
   }
