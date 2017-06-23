@@ -3,8 +3,10 @@
  */
 let express=require('express')
 let router=express.Router();
+let User=require('../lib/mongo').User;
 router.get('/',(req,res)=>{
-  console.log(req.body);
-  res.send('123')
+ let info=User.isRegister(req.query.username);
+ console.log(info);
+  res.send(info);
 });
 module.exports=router;
