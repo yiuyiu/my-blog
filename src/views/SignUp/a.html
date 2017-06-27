@@ -1,0 +1,41 @@
+<div>
+  <common-head
+    :blog="blog"></common-head>
+  <!--form-data相关需要看看-->
+  <div class="ui grid">
+    <div class="four wide column"></div>
+    <div class="eight wide column">
+      <div class="ui form segment">
+        <div class="field required">
+          <label>用户名</label>
+          <input type="text" placeholder="用户名" name="username" v-model="field.name" @blur="onblur">
+        </div>
+        <div class="field required">
+          <label>密码</label>
+          <input type="password" name="password" placeholder="密码" v-model="field.password">
+        </div>
+        <div class="field required">
+          <label>重复密码</label>
+          <input type="password" name="repassword" placeholder="重复密码" v-model="field.repassword">
+        </div>
+        <div class="field required">
+          <label>性别</label>
+          <select name="gender" class="ui compact selection dropdown" v-model="field.sex">
+            <option value="m">男</option>
+            <option value="f">女</option>
+            <option value="x">保密</option>
+          </select>
+        </div>
+        <div class="field required">
+          <label>头像</label>
+          <input type="file" name="avatar" ref="fileType">
+        </div>
+        <div class="field required">
+          <label>个人简介</label>
+          <textarea name="bio" rows="5" v-model="field.signature"></textarea>
+        </div>
+        <button class="ui button fluid" @click="onSubmit">注册</button>
+      </div>
+    </div>
+  </div>
+</div>

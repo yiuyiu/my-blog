@@ -5,8 +5,8 @@ let express=require('express')
 let router=express.Router();
 let User=require('../lib/mongo').User;
 router.get('/',(req,res)=>{
- let info=User.isRegister(req.query.username);
- console.log(info);
-  res.send(info);
+ User.getUserName(req.query.username).exec((err,userInfo)=>{
+   userInfo?res.send(true):res.send(false);
+ });
 });
 module.exports=router;

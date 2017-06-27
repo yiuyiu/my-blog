@@ -52,7 +52,8 @@
               password:'',
               respassword:'',
               sex:'',
-              signature:''
+              signature:'',
+              canRegister:true
             },
             blog:{
                 title:'xixi',
@@ -65,6 +66,10 @@
      },
     methods:{
       onSubmit(){
+          if(!this.canRegister){
+              return false;
+          }
+          console.log(111)
         let filesElement=this.$refs.fileType;
         let formData = new FormData();
 // HTML 文件类型input，由用户选择
@@ -79,6 +84,7 @@
         ax.post('http://localhost:3000/signUp',formData,{headers})
       },
       onblur(){
+          let that=this;
           if(!this.field.name){
               return false;
           }
@@ -89,7 +95,10 @@
           }
         })
           .then(function (res) {
-            console.log(res);
+            if(res.data===true){
+                alert('名字已经被注册')
+            }
+            that.canregister=false;
           })
           .catch(function (error) {
             console.log(error);

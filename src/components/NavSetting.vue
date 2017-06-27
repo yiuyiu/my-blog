@@ -1,9 +1,9 @@
 <template>
   <div class="nav-setting">
     <div class="ui buttons">
-      <div class="ui floating dropdown button">
+      <div class="ui floating dropdown button" @click="showMenu">
         <i class="icon bars"></i>
-        <div class="menu">
+        <div class="menu" :class="{'show-menu':hasMenu}">
           <template v-if="hasUser">
             <!--<a class="item" href="/posts?author=<%= user._id %>">个人主页</a>-->
             <a class="item" href="/posts">个人主页</a>
@@ -32,7 +32,9 @@
     padding: 10px 10px 0 10px;
     background-color: #fff !important;
   }
-
+  .menu.show-menu{
+    display: block;
+  }
   .nav-setting .icon.bars {
     color: #000;
     font-size: 18px;
@@ -40,6 +42,16 @@
 </style>
 <script>
   export default{
-    props:['hasUser']
+      data(){
+        return{
+            hasMenu:''
+        }
+      },
+    props:['hasUser'],
+    methods:{
+        showMenu(){
+           this.hasMenu=!this.hasMenu;
+        }
+    }
   }
 </script>
