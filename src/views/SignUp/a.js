@@ -40,9 +40,9 @@ export default{
         'Content-Type': 'multipart/form-data'
       };
       ax.post('http://localhost:3000/signUp',formData,{headers}).then(res=>{
-        if(res.data===true){
-          alert('注册成功了')
-        }
+         if(res.data.success){
+           window.localStorage.setItem('token',res.data.token);
+         }
       })
     },
     onblur(){
