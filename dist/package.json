@@ -1,5 +1,5 @@
 {
-  "name": "blog-back",
+  "name": "blog",
   "version": "1.0.0",
   "description": "blog back",
   "main": "index.js",
@@ -16,8 +16,10 @@
     "connect-multiparty": "^2.0.0",
     "express": "^4.15.3",
     "express-formidable": "^1.0.0",
+    "express-jwt": "^5.3.0",
     "express-session": "^1.15.3",
     "express-winston": "^2.4.0",
+    "jwt-simple": "^0.5.1",
     "marked": "^0.3.6",
     "moment": "^2.18.1",
     "mongolass": "^2.4.5",

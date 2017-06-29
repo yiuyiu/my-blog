@@ -16,3 +16,10 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+// 判断token
+let token=window.localStorage.getItem('token');
+if(!token){
+  router.push('signIn')
+}else{
+  
+}

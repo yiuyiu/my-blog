@@ -7,14 +7,8 @@ mongoose.connect(config.mongoUrl);
 // 取得用户模型，在其之上定义方法
 let User=require('../models/users');
 exports.User={
-  create(user,res){
-    new User(user).save(err=>{
-      if(!err){
-        res.send(true)
-      }else{
-        res.send(false)
-      }
-    })
+  create(user){
+    return new User(user);
   },
   getUserName(name){
     return User.findOne({name:name})

@@ -24,7 +24,9 @@ export default{
       this.$http.post('http://localhost:3000/signIn',{
         username:this.username
       }).then(res=>{
-
+         if(res.data.success){
+           window.localStorage.setItem('token',res.data.token);
+         }
       })
     }
   }

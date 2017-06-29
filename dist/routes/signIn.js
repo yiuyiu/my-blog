@@ -3,13 +3,14 @@
  */
 let express=require('express');
 let bodyParser=require('body-parser');
-let urlencodedParser = bodyParser.urlencoded({ extended: false })
 let jsonParser = bodyParser.json();
 let router=express.Router();
+let setToken=require('../lib/auth').setToken;
 let User=require('../lib/mongo').User;
 router.post('/',jsonParser,(req,res)=>{
   User.getUserName(req.body.username).then(userInfo=>{
-    res.send(userInfo)
+    let obj=setToken(userInfo.name);
+    res.json(Object.assign({success:true,userInfo},obj))
   })
 });
 module.exports=router;
