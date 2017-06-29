@@ -4,7 +4,7 @@
 let express=require('express');
 let bodyParser=require('body-parser');
 let urlencodedParser = bodyParser.urlencoded({ extended: false })
-let jsonParser = bodyParser.json()
+let jsonParser = bodyParser.json();
 let router=express.Router();
 let User=require('../lib/mongo').User;
 router.post('/',jsonParser,(req,res)=>{
