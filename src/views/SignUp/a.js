@@ -42,6 +42,7 @@ export default{
       ax.post('http://localhost:3000/signUp',formData,{headers}).then(res=>{
          if(res.data.success){
            window.localStorage.setItem('token',res.data.token);
+           this.$router.push('posts')
          }
       })
     },

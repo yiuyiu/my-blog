@@ -12,6 +12,5 @@ let userSchema=new Schema({
 });
 userSchema.index({name:1});
 let User=mongoose.model('User',userSchema);
-
 module.exports=User;
 
