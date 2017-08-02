@@ -4,6 +4,7 @@ import Hello from '@/components/Hello'
 import SignUp from '@/views/SignUp/SignUp.vue'
 import SignIn from '../views/SignIn/SignIn.vue'
 import Post from '../views/Posts/Post.vue'
+import Loading from '../components/Loading.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -25,6 +26,10 @@ export default new Router({
     {
       path:'/posts',
       component:Post
+    },
+    {
+      path:'/load',
+      component:Loading
     }
   ]
 })

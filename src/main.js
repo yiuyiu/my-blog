@@ -16,13 +16,20 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
-// 判断token
+// 判断toke
 let token=window.localStorage.getItem('token');
 // 首页
 // router.push('signIn')
 if(token){
+  // 有token的话先去加载页，验证成功后，进入首页
+  router.push('load');
   ax.defaults.headers.common['Authorization'] =token;
   ax.post('http://localhost:3000/signIn').then(res=>{
+    if(res.data.success){
+      router.push('/')
+    }else{
+      router.push('signIn')
+    }
     console.log(res.data)
   })
 }

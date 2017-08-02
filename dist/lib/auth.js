@@ -28,13 +28,8 @@ exports.checkToken=function (req,res,next) {
         res.json({success:false,message:'过期了'})
       }
       User.getUserName(decoded.iss).then(userInfo=>{
-        let a=userInfo
-        console.log(a.valueOf())
-        var b={a:123,b:345}
-        console.dir(b)
-        console.log(Object.keys(a));
-        var c=Object.assign({success:true},{userInfo});
-        res.send(c)
+        // res.json(Object.assign({success:true},{userInfo}))
+        req.user=userInfo;
       })
       // handle token here
 
