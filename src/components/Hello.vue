@@ -2,13 +2,13 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
-    <form>
+    <div>
       <input type="text" name="txt1" v-model="text1">
          <input type="text" name="txt2" v-model="text2">
       <input type="file" class="file" ref="files">
       <input type="submit" value="提交">
       <div @click="xixi">xixi</div>
- </form>
+ </div>
     <ul>
       <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
       <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
@@ -40,6 +40,7 @@ export default {
   },
   methods:{
       xixi(){
+        console.log(this)
           console.log(1112)
          var filesElement=this.$refs.files
         var formData = new FormData();

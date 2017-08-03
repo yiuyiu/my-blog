@@ -7,7 +7,7 @@ import Post from '../views/Posts/Post.vue'
 import Loading from '../components/Loading.vue'
 Vue.use(Router)
 
-export default new Router({
+const route=new Router({
   mode: 'history',
   routes: [
     {
@@ -17,19 +17,29 @@ export default new Router({
     },
     {
       path:'/signUp',
-      component:SignUp
+      component:SignUp,
+      meta: { requiresAuth: true }
     },
     {
       path:'/signIn',
-      component:SignIn
+      component:SignIn,
+      meta: { requiresAuth: true}
     },
     {
       path:'/posts',
-      component:Post
+      component:Post,
+      meta: { requiresAuth: true }
     },
     {
       path:'/load',
       component:Loading
     }
   ]
-})
+});
+route.beforeEach((to,from,next)=>{
+  if (to.matched.some(record => record.meta.requiresAuth)){
+    console.log('123')
+  }
+   next();
+});
+export default route
