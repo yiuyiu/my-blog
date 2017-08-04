@@ -3,5 +3,6 @@
  */
 let baseUrl='http://localhost:3000/';
 export default{
-  checkToken:baseUrl+'signIn'
+  checkToken:baseUrl+'signIn',
+  signIn:baseUrl+'signIn'
 }

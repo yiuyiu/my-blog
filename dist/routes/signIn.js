@@ -9,9 +9,9 @@ let setToken=require('../lib/auth').setToken;
 let User=require('../lib/mongo').User;
 let checkToken=require('../lib/auth').checkToken;
 router.post('/',[checkToken,jsonParser],(req,res)=>{
-  console.log(req.headers)
   User.getUserName(req.body.username).then(userInfo=>{
     let obj=setToken(userInfo.name);
+    if(obj&&userInfo.password===req.body.password)
     res.json(Object.assign({success:true,userInfo},obj))
   })
 });
