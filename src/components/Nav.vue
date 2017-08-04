@@ -4,9 +4,9 @@
       <div class="four wide column"></div>
       <div class="eight wide column">
         <a href="/posts">
-          <h1>{{blogTitle}}</h1>
+          <h1>xixi</h1>
         </a>
-        <p>{{blogDes}}</p>
+        <p>xixi你管我</p>
       </div>
     </div>
   </div>
@@ -27,6 +27,6 @@
 </style>
 <script>
     export default{
-        props:['blogTitle','blogDes']
+
     }
 </script>

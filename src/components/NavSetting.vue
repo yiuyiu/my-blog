@@ -4,12 +4,12 @@
       <div class="ui floating dropdown button" @click="showMenu">
         <i class="icon bars"></i>
         <div class="menu" :class="{'show-menu':hasMenu}">
-          <template v-if="hasUser">
+          <template v-if="isLogged">
             <!--<a class="item" href="/posts?author=<%= user._id %>">个人主页</a>-->
             <a class="item" href="/posts">个人主页</a>
             <div class="divider"></div>
             <a class="item" href="/posts/create">发表文章</a>
-            <a class="item" href="/signout">登出</a>
+            <a class="item" @click="logout">登出</a>
           </template>
           <template v-else>
             <a class="item" href="/signin">登录</a>
@@ -44,11 +44,20 @@
   export default{
       data(){
         return{
-            hasMenu:''
+            hasMenu:'',
+            isLogged:''
         }
       },
-    props:['hasUser'],
+    created(){
+      console.log('global: '+this.$global.isLogged);
+      this.isLogged=this.$global.isLogged;
+    },
     methods:{
+        logout(){
+          localStorage.clear();
+          this.$global.isLogged=false;
+          this.$router.push('signIn');
+        },
         showMenu(){
            this.hasMenu=!this.hasMenu;
         }

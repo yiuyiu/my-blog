@@ -1,13 +1,10 @@
 <template>
   <header>
-    <nav-bar
-    :blogTitle="blog.title"
-    :blogDes="blog.des"></nav-bar>
-    <nav-setting
-    :hasUser="user"></nav-setting>
-    <notice
-    :success="success"
-    :error="error"></notice>
+    <nav-bar></nav-bar>
+    <nav-setting></nav-setting>
+    <!--<notice-->
+    <!--:success="success"-->
+    <!--:error="error"></notice>-->
   </header>
 </template>
 <style></style>

@@ -9,3 +9,9 @@ export function checkToken() {
 export function signIn(username,password){
   return ax.post(api.signIn,{username,password})
 }
+export function create(author,title,content) {
+  return ax.post(api.create,{author,title,content});
+}
+export function getPosts(user){
+  return ax.get(api.getPosts,{params:user});
+}

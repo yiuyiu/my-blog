@@ -4,6 +4,7 @@ import Hello from '@/components/Hello'
 import SignUp from '@/views/SignUp/SignUp.vue'
 import SignIn from '../views/SignIn/SignIn.vue'
 import Post from '../views/Posts/Post.vue'
+import Create from '../views/Create.vue'
 import Loading from '../components/Loading.vue'
 import ax from 'axios'
 import {checkToken} from '../service/service'
@@ -33,50 +34,50 @@ const route=new Router({
       meta: { requiresAuth: true }
     },
     {
+      path:'/create',
+      component:Create,
+      meta:{requiresAuth:true}
+    },
+    {
       path:'/load',
       component:Loading
     }
   ]
 });
 route.beforeEach((to,from,next)=>{
-  if (to.matched.some(record => record.meta.requiresAuth)){
-    // 判断toke
-    let token=window.localStorage.getItem('token');
-// 首页
-    if(token){
-      // 有token的话先去加载页，验证成功后，进入首页
-      // next('load');
-      ax.defaults.headers.common['Authorization'] =token;
-      console.log(checkToken())
-      checkToken().then(res=>{
-        console.log(res)
+  let token=window.localStorage.getItem('token');
+  if(token){
+    // 有token的话先去加载页，验证成功后，进入首页
+    // next('load');
+    ax.defaults.headers.common['Authorization'] =token;
+    checkToken().then(res=>{
+      if (to.matched.some(record => record.meta.requiresAuth)){
         if(res.data.success){
-          next()
+          Vue.prototype.$global.isLogged=true;
+          Vue.prototype.$global.userInfo=res.data.userInfo;
+          next();
         }else{
           next('signIn')
         }
-        console.log(res.data)
-      })
-    }
-    else{
-      next('signIn')
-    }
-  }
-  if (to.matched.some(record => record.meta.requireNoAuth)){
-    console.log(333)
-    let token=window.localStorage.getItem('token');
-    if(token){
-      ax.defaults.headers.common['Authorization'] =token;
-      checkToken().then(res=>{
-        console.log(res)
+      }
+      if (to.matched.some(record => record.meta.requireNoAuth)){
         if(res.data.success){
-          next('posts')
+          Vue.prototype.$global.isLogged=true;
+          Vue.prototype.$global.userInfo=res.data.userInfo;
+          next('/posts');
         }else{
-          next()
+          next();
         }
-      })
+      }
+    })
+  }
+  if(!token){
+    if (to.matched.some(record => record.meta.requireNoAuth)){
+      next();
     }
-    next();
+    if (to.matched.some(record => record.meta.requiresAuth)){
+      next('signIn');
+    }
   }
 });
 export default route

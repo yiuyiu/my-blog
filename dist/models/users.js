@@ -11,6 +11,5 @@ let userSchema=new Schema({
   sign:String
 });
 userSchema.index({name:1});
-let User=mongoose.model('User',userSchema);
-module.exports=User;
+module.exports=mongoose.model('User',userSchema);
 

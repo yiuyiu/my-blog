@@ -7,7 +7,11 @@ import {checkToken} from './service/service'
 // 用了import后貌似把css里的相关地址也引入进来了
 import '../lib/semantic.min.css'
 Vue.config.productionTip = false;
-
+// 是否登陆
+Vue.prototype.$global={
+  isLogged:false,
+  userInfo:''
+}
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
