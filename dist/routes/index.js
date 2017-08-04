@@ -10,5 +10,7 @@ module.exports=function (app) {
   });
   app.use('/signUp',require('./signUp'));
   app.use('/isRegister',require('./isRegister'));
-  app.use('/signIn',require('./signIn'))
+  app.use('/signIn',require('./signIn'));
+  app.use('/checkToken',require('./checkToken'));
+  app.use('/posts',require('./posts'));
 };

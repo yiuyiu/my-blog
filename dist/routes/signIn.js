@@ -7,12 +7,20 @@ let jsonParser = bodyParser.json();
 let router=express.Router();
 let setToken=require('../lib/auth').setToken;
 let User=require('../lib/mongo').User;
-let checkToken=require('../lib/auth').checkToken;
-router.post('/',[checkToken,jsonParser],(req,res)=>{
+router.post('/',[jsonParser],(req,res)=>{
   User.getUserName(req.body.username).then(userInfo=>{
-    let obj=setToken(userInfo.name);
-    if(obj&&userInfo.password===req.body.password)
-    res.json(Object.assign({success:true,userInfo},obj))
+    if(userInfo){
+      let obj=setToken(userInfo.name);
+      if(userInfo.password===req.body.password){
+        res.json(Object.assign({success:true,userInfo},obj))
+      }else{
+        res.json({success:false})
+      }
+    }
+    if(!userInfo){
+      res.json({success:false})
+    }
+
   })
 });
 module.exports=router;
