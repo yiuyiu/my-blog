@@ -25,7 +25,7 @@ exports.Post={
   },
   getPost(user){
     let query={};
-    if (user){query._id=user}
+    if (user){query.author=user}
     return Post.find(query,null);
   }
 }

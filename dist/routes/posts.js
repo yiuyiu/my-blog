@@ -10,19 +10,29 @@ let Post=require('../lib/mongo').Post;
 let User=require('../lib/mongo').User;
 // 查看
 router.get('/',(req,res)=>{
-Post.getPost().exec((err,posts)=>{
-  if(!err){
-    let arr=posts;
-    arr.forEach((post)=>{
-      User.getUserById(post.author).exec((err,user)=>{
-        let obj=user;
-        post.user=obj;
-        console.log(post)
-      })
-    })
-    res.json({success:true,message:posts})
+// Post.getPost().exec((err,posts)=>{
+//   if(!err){
+//     let arr=posts;
+//     arr.forEach((post)=>{
+//       User.getUserById(post.author).exec((err,user)=>{
+//         let obj=Object.assign({},{post});
+//         obj.user=user;
+//         console.log(obj)
+//       })
+//     })
+//     res.json({success:true,message:posts})
+//   }
+// })
+  let author=req.query.author;
+  let user="";
+  if(author){
+    user=author
   }
-})
+  Post.getPost(user).populate('author').exec((err,posts)=>{
+    if(!err){
+      res.json({success:true,message:posts})
+    }
+  })
 });
 // 创建Post
 router.post('/create',[jsonParser],(req,res)=>{
